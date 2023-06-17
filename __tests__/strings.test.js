@@ -34,27 +34,33 @@ describe('/strings', () => {
           done();
         });
     });
-  });
-
-  describe('GET /upper/{string}', () => {
-    it('returns the uppercased string when passed hello', done => {
+    it('returns the uppercased string when passed manchester', done => {
       request(app)
-        .get('/strings/upper/hello')
+        .get('/strings/upper/manchester')
         .then(res => {
           expect(res.status).toEqual(200);
-          expect(res.body).toEqual({ result: 'HELLO' });
+          expect(res.body).toEqual({ result: 'MANCHESTER' });
           done();
         });
     });
   });
 
   describe('GET /lower/{string}', () => {
-    xit('returns the lowercased string', done => {
+    it('returns the lowercased string when passed HELLO', done => {
       request(app)
         .get('/strings/lower/HELLO')
         .then(res => {
           expect(res.status).toEqual(200);
           expect(res.body).toEqual({ result: 'hello' });
+          done();
+        });
+    });
+    it('returns the lowercased string when passed MANCHESTER', done => {
+      request(app)
+        .get('/strings/lower/MANCHESTER')
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body).toEqual({ result: 'manchester' });
           done();
         });
     });
