@@ -16,7 +16,10 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  res.json({ result: firstCharacter(req.params.string) });
+  const { string } = req.params;
+  const { length } = req.query;
+  const result = length ? firstCharacter(string, parseInt(length, 10)) : firstCharacter(string);
+  res.json({ result });
 });
 
 module.exports = app;

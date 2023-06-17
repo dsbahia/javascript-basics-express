@@ -14,11 +14,10 @@ function countCharacters(string) {
   return string.length;
 }
 
-function firstCharacter(string) {
-  return string.charAt();
-}
-
-function firstCharacters(string, n) {
+function firstCharacter(string, n = 1) {
+  if (n === 1) {
+    return string.charAt();
+  }
   return string.substring(0, n);
 }
 
@@ -28,5 +27,4 @@ module.exports = {
   lowercase,
   countCharacters,
   firstCharacter,
-  firstCharacters,
 };
