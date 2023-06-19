@@ -66,6 +66,18 @@ describe('/strings', () => {
     });
   });
 
+  describe('GET /count/{string}', () => {
+    it('counts characters in string', done => {
+      request(app)
+        .get('/strings/count/hellohandsome')
+        .then(res => {
+          expect(res.status).toEqual(200);
+          expect(res.body).toEqual({ result: 13 });
+          done();
+        });
+    });
+  });
+
   describe('GET /first-characters/{string}', () => {
     it('returns the first character of the string when there is no query string', done => {
       request(app)

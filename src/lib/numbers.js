@@ -52,5 +52,5 @@ module.exports = {
   roundDown,
   absolute,
   quotient,
-  remainder
+  remainder,
 };
