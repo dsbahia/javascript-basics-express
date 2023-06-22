@@ -99,4 +99,19 @@ app.post('/numbers/divide', (req, res) => {
   return res.json({ result: divide(a, b) });
 });
 
+app.post('/numbers/remainder', (req, res) => {
+  const { a, b } = req.body;
+
+  if (b === 0) {
+    return res.status(400).json({ error: 'Unable to divide by 0.' });
+  }
+  if (a === undefined || b === undefined) {
+    return res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
+  }
+  if (isNaN(a) || isNaN(b)) {
+    return res.status(400).json({ error: 'Parameters must be valid numbers.' });
+  }
+
+  return res.json({ result: remainder(a, b) });
+});
 module.exports = app;
