@@ -50,7 +50,6 @@ describe('/numbers', () => {
         .get('/numbers/subtract/2/from/1')
         .then(res => {
           expect(res.status).toEqual(200);
-          console.log(res.body);
           expect(res.body).toEqual({ result: -1 });
           done();
         });
@@ -78,7 +77,7 @@ describe('/numbers', () => {
   });
 
   describe('POST /multiply', () => {
-    xit('multiplies two numbers', done => {
+    it('multiplies two numbers', done => {
       request(app)
         .post('/numbers/multiply')
         .send({ a: 10, b: 3 })
@@ -89,7 +88,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('multiplies stringified numbers', done => {
+    it('multiplies stringified numbers', done => {
       request(app)
         .post('/numbers/multiply')
         .send({ a: '-4', b: '-9' })
@@ -100,7 +99,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if a parameter is missing', done => {
+    it('errors if a parameter is missing', done => {
       request(app)
         .post('/numbers/multiply')
         .send({ a: 'fish' })
@@ -111,7 +110,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if the parameters are not numbers', done => {
+    it('errors if the parameters are not numbers', done => {
       request(app)
         .post('/numbers/multiply')
         .send({ a: 'fish', b: 'chips' })
@@ -124,7 +123,7 @@ describe('/numbers', () => {
   });
 
   describe('POST /divide', () => {
-    xit('divides two numbers', done => {
+    it('divides two numbers', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 162, b: 3 })
@@ -135,7 +134,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('divides stringified numbers', done => {
+    it('divides stringified numbers', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: '-4', b: '8' })
@@ -146,7 +145,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('divides 0 by a number', done => {
+    it('divides 0 by a number', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 0, b: 10 })
@@ -157,7 +156,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if dividing by 0', done => {
+    it('errors if dividing by 0', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 10, b: 0 })
@@ -168,7 +167,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if a parameter is missing', done => {
+    it('errors if a parameter is missing', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 'fish' })
@@ -179,7 +178,7 @@ describe('/numbers', () => {
         });
     });
 
-    xit('errors if the parameters are not numbers', done => {
+    it('errors if the parameters are not numbers', done => {
       request(app)
         .post('/numbers/divide')
         .send({ a: 'fish', b: 'chips' })
