@@ -7,19 +7,8 @@ const {
   firstCharacter,
 } = require('./lib/strings');
 
-const {
-  add,
-  subtract,
-  multiply,
-  divide,
-  power,
-  round,
-  roundUp,
-  roundDown,
-  absolute,
-  quotient,
-  remainder,
-} = require('./lib/numbers');
+const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
+const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
 
 const app = express();
 app.use(express.json());
@@ -113,6 +102,29 @@ app.post('/numbers/remainder', (req, res) => {
 
   return res.json({ result: remainder(a, b) });
 });
-module.exports = app;
+
+app.post('/booleans/negate', (req, res) => {
+  res.json({ result: negate(req.body.value) });
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  res.json({ result: truthiness(req.body.value) });
+});
+
+app.get('/booleans/is-odd/:a', (req, res) => {
+  const a = parseFloat(req.params.a);
+  if (Number.isNaN(a)) {
+    return res.status(400).json({ error: 'Parameter must be a number.' });
+  }
+  res.json({ result: isOdd(a) });
+});
+
+app.get('/booleans/:string/starts-with/:character', (req, res) => {
+  const { string, character } = req.params;
+  if (character.length > 1) {
+    return res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+  }
+  res.json({ result: startsWith(character, string) });
+});
 
 module.exports = app;
