@@ -21,28 +21,28 @@ const app = express();
 app.use(express.json());
 
 app.get('/strings/hello/:name', (req, res) => {
-  res.json({ result: sayHello(req.params.name) });
+  return res.json({ result: sayHello(req.params.name) });
 });
 
 app.get('/strings/upper/:string', (req, res) => {
-  res.json({ result: uppercase(req.params.string) });
+  return res.json({ result: uppercase(req.params.string) });
 });
 
 app.get('/strings/lower/:string', (req, res) => {
-  res.json({ result: lowercase(req.params.string) });
+  return res.json({ result: lowercase(req.params.string) });
 });
 
 app.get('/strings/count/:string', (req, res) => {
   const { string } = req.params;
   const result = countCharacters(string);
-  res.json({ result });
+  return res.json({ result });
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
   const { string } = req.params;
   const { length } = req.query;
   const result = length ? firstCharacter(string, parseInt(length, 10)) : firstCharacter(string);
-  res.json({ result });
+  return res.json({ result });
 });
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
@@ -50,9 +50,9 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
   const b = parseInt(req.params.b);
 
   if (Number.isNaN(a) || Number.isNaN(b))
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+    return res.status(400).json({ error: 'Parameters must be valid numbers.' });
 
-  res.json({ result: add(a, b) });
+  return res.json({ result: add(a, b) });
 });
 
 app.get('/numbers/subtract/:a/from/:b', (req, res) => {
@@ -60,9 +60,9 @@ app.get('/numbers/subtract/:a/from/:b', (req, res) => {
   const b = parseInt(req.params.b);
 
   if (Number.isNaN(a) || Number.isNaN(b))
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+    return res.status(400).json({ error: 'Parameters must be valid numbers.' });
 
-  res.json({ result: subtract(b, a) });
+  return res.json({ result: subtract(b, a) });
 });
 
 app.post('/numbers/multiply', (req, res) => {
@@ -107,48 +107,48 @@ app.post('/numbers/remainder', (req, res) => {
 });
 
 app.post('/booleans/negate', (req, res) => {
-  res.json({ result: negate(req.body.value) });
+  return res.json({ result: negate(req.body.value) });
 });
 
 app.post('/booleans/truthiness', (req, res) => {
-  res.json({ result: truthiness(req.body.value) });
+  return res.json({ result: truthiness(req.body.value) });
 });
 
 app.get('/booleans/is-odd/:a', (req, res) => {
   const a = parseInt(req.params.a);
   if (Number.isNaN(a)) {
-    res.status(400).json({ error: 'Parameter must be a number.' });
+    return res.status(400).json({ error: 'Parameter must be a number.' });
   }
-  res.json({ result: isOdd(a) });
+  return res.json({ result: isOdd(a) });
 });
 
 app.get('/booleans/:string/starts-with/:character', (req, res) => {
   const { string, character } = req.params;
   if (character.length > 1) {
-    res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+    return res.status(400).json({ error: 'Parameter "character" must be a single character.' });
   }
-  res.json({ result: startsWith(character, string) });
+  return res.json({ result: startsWith(character, string) });
 });
 
 app.post('/arrays/element-at-index/:index', (req, res) => {
   const { index } = req.params;
   const { array } = req.body;
-  res.json({ result: getNthElement(index, array) });
+  return res.json({ result: getNthElement(index, array) });
 });
 
 app.post('/arrays/to-string', (req, res) => {
   const { array } = req.body;
-  res.json({ result: arrayToCSVString(array) });
+  return res.json({ result: arrayToCSVString(array) });
 });
 
 app.post('/arrays/append', (req, res) => {
   const { array, value } = req.body;
-  res.json({ result: addToArray2(value, array) });
+  return res.json({ result: addToArray2(value, array) });
 });
 
 app.post('/arrays/starts-with-vowel', (req, res) => {
   const { array } = req.body;
-  res.json({ result: elementsStartingWithAVowel(array) });
+  return res.json({ result: elementsStartingWithAVowel(array) });
 });
 
 app.post('/arrays/remove-element', (req, res) => {
@@ -156,10 +156,9 @@ app.post('/arrays/remove-element', (req, res) => {
   const { array } = req.body;
 
   if (index !== undefined) {
-    res.json({ result: removeNthElement2(parseInt(index), array) });
-  } else {
-    res.json({ result: removeNthElement2(0, array) });
+    return res.json({ result: removeNthElement2(parseInt(index), array) });
   }
+  return res.json({ result: removeNthElement2(0, array) });
 });
 
 module.exports = app;
