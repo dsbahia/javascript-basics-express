@@ -49,13 +49,7 @@ const removeNthElement2 = (index, array) => {
   if (index < 0 || index >= array.length) {
     return array;
   }
-  const newArray = [];
-  for (let i = 0; i < array.length; i++) {
-    if (i !== index) {
-      newArray.push(array[i]);
-    }
-  }
-  return newArray;
+  return array.slice(0, index).concat(array.slice(index + 1));
 };
 
 const elementsStartingWithAVowel = strings => {
